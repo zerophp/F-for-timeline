@@ -19,8 +19,11 @@ switch($controller)
 {
     case 'timeline':
         include ('../modules/Application/src/Application/controllers/timeline.php');
-        break;
-    default:
-        include 'index.html';
+    break;
+
+    case 'error':       
+        $error_type='404';
+        include ('../modules/Application/src/Application/controllers/error.php');
+    break;    
     
 }
