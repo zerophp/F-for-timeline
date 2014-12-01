@@ -7,7 +7,7 @@ $(document).ready(function() {
 		lang:				'es',
 		start_zoom_adjust:  0,
 		start_at_slide:		0,
-        source:				'https://docs.google.com/spreadsheet/pub?key=0Am0OdXdnisZAdGJ5QXVoeXVLcEV2akFvQTNaTGM5S1E&output=html',
+        source:				'https://docs.google.com/spreadsheet/pub?key=0AsTo17XY_zOBdGlsZTdlMjlYclpvN21lTFVKVnMzSEE&output=html',
         embed_id:			'timelinejs',
 		hash_bookmark:		true,
 		font:				'PTSerif-PTSans',

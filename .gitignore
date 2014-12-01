@@ -18,3 +18,8 @@ temp/
 # Legacy ZF1
 demos/
 extras/documentation
+
+# Eclipse folders and files
+.settings/
+.buildpath
+.project

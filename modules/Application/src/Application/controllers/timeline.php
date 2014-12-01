@@ -5,24 +5,26 @@
 if(!isset($action))
     $action = 'select';
 
-
 switch ($action)
 {
     case 'insert':
-        include_once 'forms/timelineForm.php';
-        include_once 'drawForm.php';
-        
-        echo drawForm($timeline_form, 'action.php');
-        echo "esto es insert";
-    break;
+        $pagetitle = "Insert";
+        $page = __DIR__ . '/../views/timeline/insert.php';
+        break;
     case 'update':
-        echo "esto es update";
+        $pagetitle = "Update";
+        $page = __DIR__ . '/../views/timeline/update.php';
         break;
-    case 'select':
-        
-        echo "esto es select";
-    break;
     case 'delete':
-        echo "esto es delete";
+        $pagetitle = "Delete";
+        $page = __DIR__ . '/../views/timeline/delete.php';
         break;
+    default:
+    case 'select':
+        $pagetitle = "Select";
+        $page = __DIR__ . '/../views/timeline/select.php';
+        break;
+    
 }
+
+include_once (__DIR__ . '/../views/templates/template.php');
