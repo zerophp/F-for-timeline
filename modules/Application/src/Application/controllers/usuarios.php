@@ -48,19 +48,59 @@ switch ($action)
         }
         else 
         {
-            // Tomar el id
             // Leer el archivo de texto en un string
+            $filename = $_SERVER['DOCUMENT_ROOT']."/usuarios.txt";
+            $usuarios = file_get_contents($filename);
             // Obtener un array desde el string
+            $usuarios = explode("\n", $usuarios);
             // Tomar el usuario ID
             // Separar el usuario por pipes para tener una array
+            $usuario = explode("|", $usuarios[$data[4]]);
                 
+            echo "<pre>USUARIO: ";
+            print_r($usuario);
+            echo "</pre>";
+            
+            $data_usuario = array (
+                    'name'=>$usuario[0],
+                    'email'=>$usuario[1],
+                    'password'=>$usuario[2]
+            );
+            
+            echo "<pre>DATA USUARIO: ";
+            print_r($data_usuario);
+            echo "</pre>";
+            
+            die;
+            include_once (__DIR__ . '/../../forms/usuariosForm.php');
             // Dibujar el formulario con los datos del usuario
+            drawForm($usuarios_form,  '/usuarios/insert', $usuarios);
         }
        
     break;
     case 'delete':
         echo "esto es el delete";
-        
+        if($_POST)
+        {
+            // Filtrar
+            // Validar
+            // Si es valido
+                // Leer el archivo de texto en un string
+                // Obtener un array desde el string
+                // Eliminar la linea ID
+                // Sobreestribir el archivo de texto con el array juntado por saltro de lineas
+                // Ir a select 
+        }
+        else
+        {
+            // Tomar el id
+            // Leer el archivo de texto en un string
+            // Obtener un array desde el string
+            // Tomar el usuario ID
+            // Separar el usuario por pipes para tener una array
+            
+            // Dibujar el formulario de delete con los datos del usuario
+        }
     break;
     default:
     case 'select':

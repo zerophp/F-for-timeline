@@ -26,6 +26,13 @@ function drawForm($formDefinition, $action, $values, $method='post')
         
         switch ($value['type'])
         {
+            case 'html':
+                $html.=chr(13)."<div id=\"html\">";
+                
+                $html.=$value['defaultValue'];
+                
+                $html.=chr(13).'</div>';
+            break;
             case 'text':
                 $html.=chr(13)."<label>".$value['label']."</label>
                         <input type=\"".$value['type']."\" 
