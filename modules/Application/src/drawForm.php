@@ -9,10 +9,12 @@
 
 function drawForm($formDefinition, $action, $values, $method='post')
 {
-    if($values)
-    foreach ($values as $key => $value)
-    {
-        $formDefinition[$key]['defaultValue']=$value;
+    if(isset($values)) {
+        foreach ($values as $key => $value)
+        {
+            $formDefinition[$key]['defaultValue']=$value;
+            echo $value;
+        }
     }
     
     $html='';
