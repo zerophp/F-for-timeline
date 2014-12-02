@@ -1,11 +1,12 @@
 <?php
-echo "<pre>Post: ";
-print_r($_POST);
-echo "</pre>";
 
-echo "<pre>GET: ";
-print_r($_GET);
-echo "</pre>";
+// echo "<pre>Post: ";
+// print_r($_POST);
+// echo "</pre>";
+
+// echo "<pre>GET: ";
+// print_r($_GET);
+// echo "</pre>";
 
 
 // echo "<pre>";
@@ -16,9 +17,9 @@ include_once '../modules/Core/src/Router/model/parseUrl.php';
 
 $request = parseURL();
 
-echo "<pre>Request: ";
-print_r($request);
-echo "</pre>";
+// echo "<pre>Request: ";
+// print_r($request);
+// echo "</pre>";
 
 
 switch($request['controller'])
@@ -28,7 +29,12 @@ switch($request['controller'])
     break;
     default:
     case 'usuarios':
-        include ('../modules/Application/src/Application/controllers/usuarios.php');
+        ob_start();
+            include ('../modules/Application/src/Application/controllers/usuarios.php');
+            $view=ob_get_contents();
+        ob_end_clean();
+    break;
+    
     break;
 
     case 'error':       
@@ -37,3 +43,5 @@ switch($request['controller'])
     break;    
     
 }
+
+include ('../modules/Application/src/Application/layouts/dashboard.phtml'); 
