@@ -1,18 +1,4 @@
 <?php
-
-
-// echo "<pre>";
-// print_r($_SERVER['REQUEST_URI']);
-// echo "</pre>";
-
-$data = explode('/',$_SERVER['REQUEST_URI']);
-$controller = $data[1];
-@$action = $data[2];
-
-echo "<pre>Data: ";
-print_r($data);
-echo "</pre>";
-
 echo "<pre>Post: ";
 print_r($_POST);
 echo "</pre>";
@@ -22,13 +8,25 @@ print_r($_GET);
 echo "</pre>";
 
 
+// echo "<pre>";
+// print_r($_SERVER['REQUEST_URI']);
+// echo "</pre>";
+
+include_once '../modules/Core/src/Router/model/parseUrl.php';
+
+$request = parseURL();
+
+echo "<pre>Request: ";
+print_r($request);
+echo "</pre>";
 
 
-switch($controller)
+switch($request['controller'])
 {
     case 'timeline':
         include ('../modules/Application/src/Application/controllers/timeline.php');
     break;
+    default:
     case 'usuarios':
         include ('../modules/Application/src/Application/controllers/usuarios.php');
     break;

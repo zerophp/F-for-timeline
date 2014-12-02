@@ -9,10 +9,11 @@
 
 function drawForm($formDefinition, $action, $values, $method='post')
 {
+      
     if($values)
-    foreach ($values as $key => $value)
+    foreach ($values as $key => $value2)
     {
-        $formDefinition[$key]['defaultValue']=$value;
+        $formDefinition[$key]['defaultValue']=$value2;
     }
     
     $html='';
@@ -23,7 +24,7 @@ function drawForm($formDefinition, $action, $values, $method='post')
     
     foreach ($formDefinition as $key => $value)
     {
-        
+
         switch ($value['type'])
         {
             case 'html':
@@ -69,7 +70,13 @@ function drawForm($formDefinition, $action, $values, $method='post')
                 }
                 $html.="</select>";
             break;
-                        
+            case 'hidden':
+                
+                $html.=chr(13)."<input type=\"".$value['type']."\"
+                               name=\"".$value['name']."\"
+                              value=\"".$value['defaultValue']."\"
+                         />";
+            break;
             case 'submit':
                 $html.=chr(13)."<div id=\"botones\">";
                 
