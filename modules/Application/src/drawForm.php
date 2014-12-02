@@ -7,8 +7,14 @@
  * @return unknown
  */
 
-function drawForm($formDefinition, $action, $method='post')
+function drawForm($formDefinition, $action, $values, $method='post')
 {
+    if($values)
+    foreach ($values as $key => $value)
+    {
+        $formDefinition[$key]['defaultValue']=$value;
+    }
+    
     $html='';
 
     $html.="<div id=\"formulario\">".chr(13)."<label class=\"titulo\" >TimeLine Form</label>";
@@ -20,6 +26,13 @@ function drawForm($formDefinition, $action, $method='post')
         
         switch ($value['type'])
         {
+            case 'html':
+                $html.=chr(13)."<div id=\"html\">";
+                
+                $html.=$value['defaultValue'];
+                
+                $html.=chr(13).'</div>';
+            break;
             case 'text':
                 $html.=chr(13)."<label>".$value['label']."</label>
                         <input type=\"".$value['type']."\" 
