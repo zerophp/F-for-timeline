@@ -1,4 +1,3 @@
-bbb|bbb|bbb|Enviar
-ccc|ccc|ccc|Enviar
-ddd|ddd|ddd|Enviar
-Dani|pepe@ca.c|jaadf|Enviar
+0|bbb|bbb|bbb|Enviar
+0|ccc|ccc|ccc|Enviar
+-1|qqqq|qqq|qqqq|Enviar

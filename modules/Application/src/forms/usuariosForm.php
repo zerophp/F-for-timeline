@@ -1,5 +1,16 @@
 <?php
 $usuarios_form = array(
+    'id'=>
+    array(
+        'name'          => 'id',
+        'type'          => 'hidden',
+        'defaultValue'  => '',
+        'id'            => 'id',
+        'label'         => '',
+        'placeholder'   => 'Introduce name',
+        'validation'    => array('required'),
+        'filters'       => array('stripTrim', 'stripTags', 'escape'),
+    ),
     'name'=>
     array(
         'name'          => 'name',

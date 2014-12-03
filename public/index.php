@@ -1,36 +1,40 @@
 <?php
 
+// echo "<pre>Post: ";
+// print_r($_POST);
+// echo "</pre>";
+
+// echo "<pre>GET: ";
+// print_r($_GET);
+// echo "</pre>";
+
 
 // echo "<pre>";
 // print_r($_SERVER['REQUEST_URI']);
 // echo "</pre>";
 
-$data = explode('/',$_SERVER['REQUEST_URI']);
-$controller = $data[1];
-@$action = $data[2];
+include_once '../modules/Core/src/Router/model/parseUrl.php';
 
-echo "<pre>Data: ";
-print_r($data);
-echo "</pre>";
+$request = parseURL();
 
-echo "<pre>Post: ";
-print_r($_POST);
-echo "</pre>";
-
-echo "<pre>GET: ";
-print_r($_GET);
-echo "</pre>";
+// echo "<pre>Request: ";
+// print_r($request);
+// echo "</pre>";
 
 
-
-
-switch($controller)
+switch($request['controller'])
 {
     case 'timeline':
         include ('../modules/Application/src/Application/controllers/timeline.php');
     break;
+    default:
     case 'usuarios':
-        include ('../modules/Application/src/Application/controllers/usuarios.php');
+        ob_start();
+            include ('../modules/Application/src/Application/controllers/usuarios.php');
+            $view=ob_get_contents();
+        ob_end_clean();
+    break;
+    
     break;
 
     case 'error':       
@@ -39,3 +43,5 @@ switch($controller)
     break;    
     
 }
+
+include ('../modules/Application/src/Application/layouts/dashboard.phtml'); 
