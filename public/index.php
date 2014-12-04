@@ -14,12 +14,11 @@
 // echo "</pre>";
 
 include_once '../modules/Core/src/Router/model/parseUrl.php';
+include_once '../modules/Core/src/Module/model/moduleManager.php';
 
 $request = parseURL();
+$config = moduleManager('../config/global.php');
 
-// echo "<pre>Request: ";
-// print_r($request);
-// echo "</pre>";
 
 
 switch($request['controller'])

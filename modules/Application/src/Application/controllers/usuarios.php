@@ -22,7 +22,7 @@ switch ($request['action'])
             if($validate['valid'])
             {
                 // Guardar en un archivo separado por pipes                
-                createUser($postfilter);
+                createUser($postfilter, $config);
                 header('Location: /usuarios/select');                 
             }
         }     
@@ -39,19 +39,20 @@ switch ($request['action'])
             // Validar             
             $postfilter = filterForm($_POST, $usuarios_form);
             $validate = validate($postfilter, $usuarios_form);
+           
             // Si es valido
             if($validate['valid'])
             {
-                    $usuarios = updateUser($postfilter);             
+                    $usuarios = updateUser($postfilter, $config);             
             }
             // Ir a select
             header('Location: /usuarios/select');                
         }
         else 
         {
-            $usuario = fetchUser($request['params']['id']);  
+            $usuario = fetchUser($request['params']['id'], $config);  
             $usuario['id']=$request['params']['id'];
-            $data_usuario = hydrateUser($usuario);           
+            $data_usuario = hydrateUser($usuario, $config);           
             // Dibujar el formulario con los datos del usuario
             include ('/../views/usuarios/update.phtml');            
         }
@@ -71,7 +72,7 @@ switch ($request['action'])
                 // Eliminar la linea ID
                 if($postfilter['enviar']=='Si')
                 {
-                    deleteUser($postfilter['id']);
+                    deleteUser($postfilter['id'], $config);
                 }     
                  // Ir a select
                  header('Location: /usuarios/select'); 
@@ -79,11 +80,17 @@ switch ($request['action'])
         }
         else
         {
-            $usuario = fetchUser($request['params']['id']);            
+            $usuario = fetchUser($request['params']['id'],$config);            
+            if($config['repository']=='db')
+            $data_usuario = array (
+                'name'=>$usuario['name'],
+                'id'=>$request['params']['id']
+            );
+            elseif($config['repository']=='txt')
             $data_usuario = array (
                 'name'=>$usuario[1],
                 'id'=>$request['params']['id']
-            );            
+            );
             // Dibujar el formulario de delete con los datos del usuario
             // Dibujar el formulario con los datos del usuario
             include ('/../views/usuarios/delete.phtml');
@@ -91,7 +98,7 @@ switch ($request['action'])
     break;
     default:
     case 'select':
-        $data = fetchAllUser();
+        $data = fetchAllUser($config);
         include ('/../views/usuarios/select.phtml');
     break;
 }
