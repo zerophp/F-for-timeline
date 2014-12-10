@@ -1,5 +1,5 @@
 <?php
-// namespace Application\controllers;
+namespace Application\controllers;
 
 
 include_once (__DIR__ . '/../../forms/usuariosForm.php');
@@ -18,7 +18,8 @@ include_once (__DIR__ . '/../../forms/usuariosdeleteForm.php');
 
 
 
-class Application_src_Application_controllers_usuarios
+// class Application_src_Application_controllers_usuarios
+class usuarios
 {
     public $layout = 'dashboard.phtml';
     
@@ -30,7 +31,7 @@ class Application_src_Application_controllers_usuarios
             $validate = validate($postfilter, $usuarios_form);
             if($validate['valid'])
             {
-                $config = Core_src_Application_application::getConfig();
+                $config = \Core\Application\application::getConfig();
                 // Guardar en un archivo separado por pipes
                 createUser($postfilter, $config);
                 header('Location: /usuarios/select');
@@ -45,7 +46,7 @@ class Application_src_Application_controllers_usuarios
     
     public function update($params)
     {
-        $config = Core_src_Application_application::getConfig();
+        $config = \Core\Application\application::getConfig();
         
         if($_POST)
         {
@@ -74,7 +75,7 @@ class Application_src_Application_controllers_usuarios
     
     public function delete($params)
     {
-        $config = Core_src_Application_application::getConfig();
+        $config = \Core\Application\application::getConfig();
         
         if($_POST)
         {
@@ -115,7 +116,7 @@ class Application_src_Application_controllers_usuarios
     
     public function select($params)
     {
-       $config = Core_src_Application_application::getConfig();
+        $config =  \Core\Application\application::getConfig();
         
         echo "esto es el select";
         $data = fetchAllUser($config);

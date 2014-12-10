@@ -1,8 +1,8 @@
 <?php
-// namespace Core\Application;
+namespace Core\Application;
 
 
-class Core_src_Application_application
+class application
 {
     private static $controller;
     private static $action;
@@ -28,9 +28,8 @@ class Core_src_Application_application
 
     public static function run()
     {
-        $controllerNameClass = 'Application_src_Application_controllers_'.
-            self::$controller;
-
+        $controllerNameClass= '\Application\controllers\\'.$this->controller;
+        
         $controller = new $controllerNameClass();
         $actionName = self::$action;
         ob_start();

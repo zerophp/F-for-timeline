@@ -2,14 +2,18 @@
 
 function __autoload($class)
 {
-    $path = explode('_',$class);
-         
-     $path2 = '';
-     $file = array_pop($path);
-     foreach($path as $value)
+    $parts = explode('\\', $class);
+    
+    $path2 = '';
+     $file = array_pop($parts);
+    
+     foreach($parts as $value)
      {
-        $path2 .= $value."/"; 
+        $path2 .= $value."\\"; 
      }
      
-     include "/".$path2.$file.'.php';
+     $module = array_shift($parts);
+     $include = __DIR__."/modules/".$module."/src/".$path2.$file.'.php';
+         
+     include $include;
 }
