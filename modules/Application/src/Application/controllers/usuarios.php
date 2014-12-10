@@ -1,5 +1,5 @@
 <?php
-// namespace Application\controllers;
+namespace Application\controllers;
 
 
 include_once (__DIR__ . '/../../forms/usuariosForm.php');
@@ -18,7 +18,8 @@ include_once (__DIR__ . '/../../forms/usuariosdeleteForm.php');
 
 
 
-class Application_src_Application_controllers_usuarios
+// class Application_src_Application_controllers_usuarios
+class usuarios
 {
     public $layout = 'dashboard.phtml';
     
@@ -111,7 +112,7 @@ class Application_src_Application_controllers_usuarios
     public function select()
     {
         
-       $config = Core_src_Application_application::getConfig();
+       $config =  \Core\Application\application::getConfig();
         
         echo "esto es el select";
         $data = fetchAllUser($config);
