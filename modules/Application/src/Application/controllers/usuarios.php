@@ -22,7 +22,7 @@ class Application_src_Application_controllers_usuarios
 {
     public $layout = 'dashboard.phtml';
     
-    public function insertAction()
+    public function insert()
     {
         if ($_POST)
         {
@@ -42,7 +42,7 @@ class Application_src_Application_controllers_usuarios
         }
     }
     
-    public function updateAction()
+    public function update()
     {
         if($_POST)
         {
@@ -69,7 +69,7 @@ class Application_src_Application_controllers_usuarios
         }
     }
     
-    public function deleteAction()
+    public function delete()
     {
         if($_POST)
         {

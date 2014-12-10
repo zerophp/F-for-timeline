@@ -4,30 +4,19 @@
 
 class Core_src_Application_application
 {
-    public $controller;
-    public $action;
-    private $view;
+    private static $controller;
+    private static $action;
+    private static $view;
+    private static $config;
 
-    static $config;
-
-    public function __construct($config)
+    public static function setConfig($config)
     {
+        self::$config = Core_src_Module_model_moduleManager::moduleManager($config);
 
-        include_once '../modules/Core/src/Router/model/parseUrl.php';
-        include_once '../modules/Core/src/Module/model/moduleManager.php';
-              
-        
-        self::$config = moduleManager($config);
+        $request = Core_src_Router_model_parseUrl::parseURL();
 
-        $request = parseURL();
-        echo "<pre>Request: ";
-        print_r($config);
-        echo "</pre>";
-
-        $this->controller = $request['controller'];
-        $this->action = $request['action'];
-
-
+        self::$controller = $request['controller'];
+        self::$action = $request['action'];
     }
 
     public static function getConfig()
@@ -35,25 +24,24 @@ class Core_src_Application_application
         return self::$config;
     }
 
-    public function run()
+    public static function run()
     {
         $controllerNameClass = 'Application_src_Application_controllers_'.
-            $this->controller;
-
+            self::$controller;
 
         $controller = new $controllerNameClass();
-        $actionName = $this->action;
+        $actionName = self::$action;
         ob_start();
             $controller->$actionName();
-        $this->view=ob_get_contents();
+        self::$view=ob_get_contents();
         ob_end_clean();
-
+        
+        self::renderView();
 
     }
 
-    public function __destruct()
+    public static function renderView()
     {
-        echo $this->view;
-        //include ('../modules/Application/src/Application/layouts/'.$this->controller->layout);
+        echo self::$view;
     }
 }
