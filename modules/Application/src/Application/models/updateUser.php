@@ -4,17 +4,20 @@
  * 
  * @return number | FALSE
  */
-function updateUser($postfilter)
+function updateUser($postfilter, $config)
 {
     include_once ('fetchAllUser.php');
-    $filename = $_SERVER['DOCUMENT_ROOT']."/usuarios.txt";
-    $usuarios = fetchAllUser();
-    // Reeemplazar la linea ID
-    // Por el string de usuario
-    $usuarios[$postfilter['id']]=implode("|", $postfilter);
-    // Juntar los datos del usuario por pipes
-    // Sobreestribir el archivo de texto con el array juntado por saltro de lineas
-    $usuarios=implode("\n",$usuarios);
-    
-    return file_put_contents($filename, $usuarios);   
+    switch ($config['repository'])
+    {
+        case 'txt':
+            $filename = $_SERVER['DOCUMENT_ROOT']."/usuarios.txt";
+            return update2txt($filename,$postfilter);
+        break;
+        case 'db':
+            include_once __DIR__.'/update2db.php';
+            return update2db($config,$postfilter);
+        break;
+        case 'gd':
+            break;
+    }
 }
