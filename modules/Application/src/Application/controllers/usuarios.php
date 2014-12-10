@@ -30,6 +30,7 @@ class Application_src_Application_controllers_usuarios
             $validate = validate($postfilter, $usuarios_form);
             if($validate['valid'])
             {
+                $config = Core_src_Application_application::getConfig();
                 // Guardar en un archivo separado por pipes
                 createUser($postfilter, $config);
                 header('Location: /usuarios/select');
@@ -44,6 +45,8 @@ class Application_src_Application_controllers_usuarios
     
     public function update()
     {
+        $config = Core_src_Application_application::getConfig();
+        
         if($_POST)
         {
             // Filtrar
@@ -54,7 +57,7 @@ class Application_src_Application_controllers_usuarios
             // Si es valido
             if($validate['valid'])
             {
-                    $usuarios = updateUser($postfilter, $config);             
+                $usuarios = updateUser($postfilter, $config);             
             }
             // Ir a select
             header('Location: /usuarios/select');                
@@ -71,6 +74,8 @@ class Application_src_Application_controllers_usuarios
     
     public function delete()
     {
+        $config = Core_src_Application_application::getConfig();
+        
         if($_POST)
         {
             // Filtrar
@@ -110,7 +115,6 @@ class Application_src_Application_controllers_usuarios
     
     public function select()
     {
-        
        $config = Core_src_Application_application::getConfig();
         
         echo "esto es el select";
@@ -118,26 +122,5 @@ class Application_src_Application_controllers_usuarios
         include ('/../views/usuarios/select.phtml');
     }  
 }
-
-
-
-// switch ($request['action'])
-// {
-//     case 'insert':
-        
-//     break;
-//     case 'update':
-        
-       
-//     break;
-//     case 'delete':
-//         echo "esto es el delete";
-        
-//     break;
-//     default:
-//     case 'select':
-
-//     break;
-// }
 
 
