@@ -16,5 +16,5 @@ require_once '../autoload.php';
 // $application->run();
 
 \Core\Application\application::setConfig('../config/global.php');
-\Core\Application\application::run();
+\Core\Application\application::dispatch();
 
