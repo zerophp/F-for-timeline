@@ -4,56 +4,87 @@ namespace Core\Application;
 
 class application
 {
-    public $controller;
-    public $action;
-    private $view;
+        
+    static $view;
 
     static $config;
-
-    public function __construct($config)
+    static $controller;
+    static $action;
+    
+    
+    public static function setConfig($config)
     {
 
         include_once '../modules/Core/src/Router/model/parseUrl.php';
         include_once '../modules/Core/src/Module/model/moduleManager.php';
-              
+        
         
         self::$config = moduleManager($config);
-
+        
         $request = parseURL();
         echo "<pre>Request: ";
-        print_r($config);
+        print_r($request);
         echo "</pre>";
-
-        $this->controller = $request['controller'];
-        $this->action = $request['action'];
-
-
+        
+        self::$controller = $request['controller'];
+        self::$action = $request['action'];
+        
+//         $this->controller = $request['controller'];
+//         $this->action = $request['action'];
     }
+    
+    
+//     public function __construct($config)
+//     {
+
+//         include_once '../modules/Core/src/Router/model/parseUrl.php';
+//         include_once '../modules/Core/src/Module/model/moduleManager.php';
+              
+        
+//         self::$config = moduleManager($config);
+
+//         $request = parseURL();
+//         echo "<pre>Request: ";
+//         print_r($config);
+//         echo "</pre>";
+
+//         $this->controller = $request['controller'];
+//         $this->action = $request['action'];
+
+
+//     }
 
     public static function getConfig()
     {
         return self::$config;
     }
 
-    public function run()
+    public static function run()
     {
 //         $controllerNameClass = 'Application_src_Application_controllers_'.
 //             $this->controller;
-        $controllerNameClass= '\Application\controllers\\'.$this->controller;
+        $controllerNameClass= '\Application\controllers\\'.self::$controller;
+        echo $controllerNameClass;
         
         $controller = new $controllerNameClass();
-        $actionName = $this->action;
+        $actionName = self::$action;
         ob_start();
             $controller->$actionName();
-        $this->view=ob_get_contents();
+        self::$view=ob_get_contents();
         ob_end_clean();
 
-
+        self::renderLayout();
     }
 
-    public function __destruct()
+    public static function renderLayout()
     {
-        echo $this->view;
-        //include ('../modules/Application/src/Application/layouts/'.$this->controller->layout);
+        echo self::$view;
     }
+    
+  
+//     public function __destruct()
+//     {
+//         echo self::$view;
+//         //include ('../modules/Application/src/Application/layouts/'.$this->controller->layout);
+//     }
 }

@@ -9,9 +9,9 @@ function __autoload($class)
     
     $parts = explode('\\', $class);
     
-    echo "<pre>";
-    print_r($parts);
-    echo "</pre>";
+//     echo "<pre>";
+//     print_r($parts);
+//     echo "</pre>";
     
     $path2 = '';
          $file = array_pop($parts);
@@ -24,7 +24,7 @@ function __autoload($class)
          $module = array_shift($parts);
          $include = __DIR__."/modules/".$module."/src/".$path2.$file.'.php';
         
-         echo $include;
+         echo $include."--autoloaded--";
 //          echo "<br/>";
 //          $filee="C:/www2/ffortimeline/modules/Core/src/Application/application.php"; 
 //          echo $filee;
