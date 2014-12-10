@@ -1,6 +1,7 @@
 <?php
+namespace Core\Application\Module\model;
 
-class Core_src_Module_model_moduleManager
+class moduleManager
 {
     /**
      * Return modules merge configuration
@@ -9,14 +10,14 @@ class Core_src_Module_model_moduleManager
      */
     public static function moduleManager($configfile)
     {
-        include $configfile;
+        include ($configfile);
         
         foreach ($config['modules'] as $module)
         {
             $globalConfig=array();
             $localConfig=array();
             
-            $globalfile = __DIR__.'/../../../../../config/autoload/'
+            $globalfile = __DIR__.'/../../../../../../../config/autoload/'
                           .strtolower($module).'.global.php';
             if(file_exists($globalfile))
             {
@@ -24,7 +25,7 @@ class Core_src_Module_model_moduleManager
                 $globalConfig = $config;
             }
             
-            $localfile = __DIR__.'/../../../../../config/autoload/'
+            $localfile = __DIR__.'/../../../../../../../config/autoload/'
                         .strtolower($module).'.local.php';
             if(file_exists($localfile))
             {

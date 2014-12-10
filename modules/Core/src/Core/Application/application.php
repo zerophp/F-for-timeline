@@ -12,9 +12,9 @@ class application
 
     public static function setConfig($config)
     {
-        self::$config = Core_src_Module_model_moduleManager::moduleManager($config);
+        self::$config = \Core\Application\Module\model\moduleManager::moduleManager($config);
 
-        $request = Core_src_Router_model_parseUrl::parseURL();
+        $request = \Core\Application\Router\model\parseUrl::parseURL();
 
         self::$controller = $request['controller'];
         self::$action = $request['action'];
@@ -28,7 +28,7 @@ class application
 
     public static function run()
     {
-        $controllerNameClass= '\Application\controllers\\'.$this->controller;
+        $controllerNameClass= '\Application\controllers\\'.self::$controller;
         
         $controller = new $controllerNameClass();
         $actionName = self::$action;

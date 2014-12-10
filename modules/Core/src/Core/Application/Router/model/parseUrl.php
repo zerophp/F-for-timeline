@@ -1,6 +1,8 @@
 <?php
 
-class Core_src_Router_model_parseUrl
+namespace Core\Application\Router\model;
+
+class parseUrl
 {
     /**
      * Valid URLs
