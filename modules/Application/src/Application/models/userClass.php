@@ -4,10 +4,7 @@
 class userClass
 {
     protected $config;
-    public $name;
-    public $email;
-    private $password;
-    private $id;
+    
     /**
      * Create user into repository
      * 
