@@ -6,6 +6,7 @@ class Core_src_Application_application
 {
     private static $controller;
     private static $action;
+    private static $params;
     private static $view;
     private static $config;
 
@@ -17,6 +18,7 @@ class Core_src_Application_application
 
         self::$controller = $request['controller'];
         self::$action = $request['action'];
+        self::$params = $request['params'];
     }
 
     public static function getConfig()
@@ -32,7 +34,7 @@ class Core_src_Application_application
         $controller = new $controllerNameClass();
         $actionName = self::$action;
         ob_start();
-            $controller->$actionName();
+            $controller->$actionName(self::$params);
         self::$view=ob_get_contents();
         ob_end_clean();
         

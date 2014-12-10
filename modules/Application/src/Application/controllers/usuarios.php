@@ -43,7 +43,7 @@ class Application_src_Application_controllers_usuarios
         }
     }
     
-    public function update()
+    public function update($params)
     {
         $config = Core_src_Application_application::getConfig();
         
@@ -64,15 +64,15 @@ class Application_src_Application_controllers_usuarios
         }
         else 
         {
-            $usuario = fetchUser($request['params']['id'], $config);  
-            $usuario['id']=$request['params']['id'];
+            $usuario = fetchUser($params['id'], $config);  
+            $usuario['id']=$params['id'];
             $data_usuario = hydrateUser($usuario, $config);           
             // Dibujar el formulario con los datos del usuario
             include ('/../views/usuarios/update.phtml');            
         }
     }
     
-    public function delete()
+    public function delete($params)
     {
         $config = Core_src_Application_application::getConfig();
         
@@ -96,16 +96,16 @@ class Application_src_Application_controllers_usuarios
         }
         else
         {
-            $usuario = fetchUser($request['params']['id'],$config);
+            $usuario = fetchUser($params['id'],$config);
             if($config['repository']=='db')
                 $data_usuario = array (
                     'name'=>$usuario['name'],
-                    'id'=>$request['params']['id']
+                    'id'=>$params['id']
                 );
                 elseif($config['repository']=='txt')
                 $data_usuario = array (
                     'name'=>$usuario[1],
-                    'id'=>$request['params']['id']
+                    'id'=>$params['id']
                 );
                 // Dibujar el formulario de delete con los datos del usuario
                 // Dibujar el formulario con los datos del usuario
@@ -113,7 +113,7 @@ class Application_src_Application_controllers_usuarios
         }
     }
     
-    public function select()
+    public function select($params)
     {
        $config = Core_src_Application_application::getConfig();
         
