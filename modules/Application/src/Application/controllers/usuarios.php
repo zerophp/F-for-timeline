@@ -118,9 +118,8 @@ class usuarios
     public function select()
     {
         
-       $config =  \Core\Application\application::getConfig();
+        $config =  \Core\Application\application::getConfig();
         
-        echo "esto es el select";
         $data = fetchAllUser($config);
         include ('/../views/usuarios/select.phtml');
     }  

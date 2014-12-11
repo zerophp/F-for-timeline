@@ -2,32 +2,25 @@
 namespace Core\Application;
 
 
+use \Core\Module\model as module;
+use \Core\Router\model\parseUrl as getRequest;
+
 class application
-{
-    public $controller;
-    public $action;
-    private $view;
-
+{        
+    static $view;
     static $config;
-
-    public function __construct($config)
+    static $controller;
+    static $action;
+    static $params;
+    
+    public static function setConfig($config)
     {
-
-        include_once '../modules/Core/src/Router/model/parseUrl.php';
-        include_once '../modules/Core/src/Module/model/moduleManager.php';
-              
-        
-        self::$config = moduleManager($config);
-
-        $request = parseURL();
-        echo "<pre>Request: ";
-        print_r($config);
-        echo "</pre>";
-
-        $this->controller = $request['controller'];
-        $this->action = $request['action'];
-
-
+        self::$config = module\moduleManager::getConfig($config);
+        $request = getRequest::parseURL();
+       
+        self::$controller = $request['controller'];
+        self::$action = $request['action'];
+        self::$params = $request['params'];
     }
 
     public static function getConfig()
@@ -35,25 +28,25 @@ class application
         return self::$config;
     }
 
-    public function run()
+    public static function dispatch()
     {
-//         $controllerNameClass = 'Application_src_Application_controllers_'.
-//             $this->controller;
-        $controllerNameClass= '\Application\controllers\\'.$this->controller;
+        $controllerNameClass= '\Application\controllers\\'.self::$controller;
         
         $controller = new $controllerNameClass();
-        $actionName = $this->action;
+        $actionName = self::$action;
         ob_start();
             $controller->$actionName();
-        $this->view=ob_get_contents();
+        self::$view=ob_get_contents();
         ob_end_clean();
 
-
+        self::twoStep($controller->layout);
     }
 
-    public function __destruct()
+    public static function twoStep($layout)
     {
-        echo $this->view;
-        //include ('../modules/Application/src/Application/layouts/'.$this->controller->layout);
-    }
+        echo self::$view;
+        echo $layout;
+               
+    }    
+  
 }
