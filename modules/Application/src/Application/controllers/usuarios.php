@@ -16,7 +16,7 @@ include_once (__DIR__ . '/../../../../Core/src/Forms/model/drawForm.php');
 include_once (__DIR__ . '/../../forms/usuariosdeleteForm.php');
 
 
-
+use Application\mapper;
 
 // class Application_src_Application_controllers_usuarios
 class usuarios
@@ -114,6 +114,16 @@ class usuarios
         
         $config =  \Core\Application\application::getConfig();
         
+        $mapper =  new mapper\Users();
+//         $adapter = $mapper ->getAdapter();
+        $usuarios = $mapper ->getAdapter()->fetchAll();
+        
+        echo "<pre>usuarios: ";
+        print_r($usuarios);
+        echo "</pre>";
+        
+        
+        echo "<hr>";
         $data = fetchAllUser($config);
         include ('/../views/usuarios/select.phtml');
     }  

@@ -3,6 +3,11 @@ namespace Core\Adapters;
 
 interface MysqlInterface
 {
-    public function getLastId();
-    public function numRows();    
+//     private $table;
+//     private $primaryKey;
+    
+//     public function getLastId();
+//     public function numRows(); 
+    public function getTable();
+    public function setTable($table);   
 }
