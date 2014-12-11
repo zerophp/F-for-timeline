@@ -8,8 +8,10 @@ if(isset($_SERVER['APPLICATION_ENV']))
     }
 
 set_include_path(get_include_path().
-    ";".__DIR__.'/../modules'.
-    ";".__DIR__.'/../vendor');
+            ";".__DIR__.'/../modules'.
+            ";".__DIR__.'/../vendor');
 
 \Core\Application\application::setConfig('../config/global.php');
 \Core\Application\application::dispatch();
+
+
