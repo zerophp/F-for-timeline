@@ -10,10 +10,8 @@ class application
     
     public static function setConfig($config)
     {
-        include_once '../modules/Core/src/Router/model/parseUrl.php';
-        include_once '../modules/Core/src/Module/model/moduleManager.php';
-        self::$config = moduleManager($config);  
-        $request = parseURL();
+        self::$config = \Core\Application\Module\model\moduleManager::moduleManager($config);  
+        $request = \Core\Application\Router\model\parseURL::parseURL();
         self::$controller = $request['controller'];
         self::$action = $request['action'];
     }

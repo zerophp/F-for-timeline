@@ -114,12 +114,8 @@ class usuarios
         }
     }
     
-    public function select($params)
+    public function select()
     {
-<<<<<<< HEAD
-=======
-        
->>>>>>> 04d8d5d7c250678a4e751244ac7334cb3fec1d3a
         $config =  \Core\Application\application::getConfig();
         
         $data = fetchAllUser($config);
