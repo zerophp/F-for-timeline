@@ -1,24 +1,21 @@
 <?php
 namespace Core\Application;
 
-
 class application
-{
-    private static $controller;
-    private static $action;
-    private static $params;
-    private static $view;
-    private static $config;
-
+{        
+    static $view;
+    static $config;
+    static $controller;
+    static $action;  
+    
     public static function setConfig($config)
     {
-        self::$config = \Core\Application\Module\model\moduleManager::moduleManager($config);
-
-        $request = \Core\Application\Router\model\parseUrl::parseURL();
-
+        include_once '../modules/Core/src/Router/model/parseUrl.php';
+        include_once '../modules/Core/src/Module/model/moduleManager.php';
+        self::$config = moduleManager($config);  
+        $request = parseURL();
         self::$controller = $request['controller'];
         self::$action = $request['action'];
-        self::$params = $request['params'];
     }
 
     public static function getConfig()
@@ -26,23 +23,24 @@ class application
         return self::$config;
     }
 
-    public static function run()
+    public static function dispatch()
     {
         $controllerNameClass= '\Application\controllers\\'.self::$controller;
         
         $controller = new $controllerNameClass();
         $actionName = self::$action;
         ob_start();
-            $controller->$actionName(self::$params);
+            $controller->$actionName();
         self::$view=ob_get_contents();
         ob_end_clean();
-        
-        self::renderView();
 
+        self::twoStep($controller->layout);
     }
 
-    public static function renderView()
+    public static function twoStep($layout)
     {
         echo self::$view;
-    }
+        echo $layout;
+    }    
+  
 }
