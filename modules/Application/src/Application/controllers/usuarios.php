@@ -109,23 +109,19 @@ class usuarios
         }
     }
     
-    public function select()
+    public function index()
     {
         
         $config =  \Core\Application\application::getConfig();
         
         $mapper =  new mapper\Users();
 //         $adapter = $mapper ->getAdapter();
-        $usuarios = $mapper ->getAdapter()->fetchAll();
-        
-        echo "<pre>usuarios: ";
-        print_r($usuarios);
-        echo "</pre>";
-        
+        $usuarios = $mapper->getAdapter()->fetchAll();        
         
         echo "<hr>";
-        $data = fetchAllUser($config);
-        include ('/../views/usuarios/select.phtml');
+        $data = $usuarios;//fetchAllUser($config);
+
+		include (__DIR__ . '/../views/usuarios/select.phtml');
     }  
 }
 
