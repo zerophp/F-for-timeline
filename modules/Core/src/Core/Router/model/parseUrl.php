@@ -1,4 +1,5 @@
 <?php
+namespace Core\Router\model;
 /**
  * Valid URLs
  * /users/select/id/1/param2/val2/param3/val3 (controller=users, action=select)
@@ -24,58 +25,61 @@
  *                                  )
  *                  );
  */
-
-function parseURL()
+class parseUrl
 {
-    $request = array();
-    $action='';
-    $controller='';
-    $params=array();
-    
-    $data = explode('/',$_SERVER['REQUEST_URI']);
-    
-    if(isset($data[1]))
-        $controller = $data[1];
-    
-    if(isset($data[2]))
-        $action = $data[2];
-     
-    
-    
-    if(sizeof($data)>3)
+    public static function parseURL()
     {
-        for($a=3;$a<sizeof($data);$a+=2)
+        $request = array();
+        $action='';
+        $controller='';
+        $params=array();
+    
+        $data = explode('/',$_SERVER['REQUEST_URI']);
+    
+        if(isset($data[1]))
+            $controller = $data[1];
+    
+        if(isset($data[2]))
+            $action = $data[2];
+         
+    
+    
+        if(sizeof($data)>3)
         {
-            $params[$data[$a]] = $data[$a+1];
+            for($a=3;$a<sizeof($data);$a+=2)
+            {
+                $params[$data[$a]] = $data[$a+1];
+            }
         }
-    }
-   
-    if(sizeof($data)>3 && sizeof($data)%2==0)
-    {
-        $controller = 'error';
-        $action = '403';
-    }
-    
-    
-
-    
-    
-    if($controller !='')
-    {
-        if(!is_file($_SERVER['DOCUMENT_ROOT'].'/../modules/Application/src/Application/controllers/'.$controller.'.php'))
+         
+        if(sizeof($data)>3 && sizeof($data)%2==0)
         {
             $controller = 'error';
-            $action = '404';            
+            $action = '403';
         }
+    
+
+        if($controller !='')
+        {
+            if(!is_file($_SERVER['DOCUMENT_ROOT'].'/../modules/Application/src/Application/controllers/'.$controller.'.php'))
+            {
+                $controller = 'error';
+                $action = '404';
+            }
+        }
+    
+        $request = array('controller'=>$controller,
+            'action'=>$action,
+            'params'=>$params
+        );
+        
+        
+         
+        return $request;
     }
     
-    $request = array('controller'=>$controller,
-                     'action'=>$action,
-                     'params'=>$params
-    );
-           
-    return $request;
 }
+
 
 
 
