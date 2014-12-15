@@ -3,8 +3,8 @@ $config = array(
     'database'=>array(
         'host'=>'localhost',
         'user'=>'root',
-        'password'=>'1234',
+        'password'=>'',
         'db'=>'timeline'
     ),   
-    'repository'=>'db' 
+    'adapter'=>'db' 
 );
