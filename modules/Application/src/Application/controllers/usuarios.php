@@ -111,7 +111,6 @@ class usuarios
     
     public function select()
     {
-        
         $config =  \Core\Application\application::getConfig();
         
         $mapper =  new mapper\Users();
