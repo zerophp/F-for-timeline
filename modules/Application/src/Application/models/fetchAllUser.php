@@ -6,7 +6,7 @@ function fetchAllUser($config)
     
     
     
-    switch ($config['repository'])
+    switch ($config['adapter'])
     {
         case 'txt':
              // Si es valido

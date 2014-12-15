@@ -30,10 +30,10 @@ class application
 
     public static function dispatch()
     {
-        $controllerNameClass= '\Application\controllers\\'.self::$controller;
-        
+        $controllerNameClass = '\\Application\\controllers\\' . self::$controller;
+    
         $controller = new $controllerNameClass();
-        $actionName = self::$action;
+        $actionName = self::$action != '' ? self::$action : 'index';
         ob_start();
             $controller->$actionName();
         self::$view=ob_get_contents();
@@ -44,9 +44,8 @@ class application
 
     public static function twoStep($layout)
     {
-        echo self::$view;
-        echo $layout;
-               
+		$view = self::$view;
+        include __DIR__ . self::$config['layout'] . $layout;
     }    
   
 }

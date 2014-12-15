@@ -6,5 +6,5 @@ $config = array(
         'password'=>'',
         'db'=>'timeline'
     ),   
-    'repository'=>'db' 
+    'adapter'=>'db' 
 );
