@@ -17,12 +17,22 @@ $usuariosdelete_form = array(
         'type'          => 'text',
         'defaultValue'  => '',
         'id'            => 'name',
-        'label'         => 'Name',
+        'label'         => '¿Realmente quiere borrar el usuario con este Nombre?',
         'placeholder'   => 'Introduce name',
         'validation'    => array('required'),
         'filters'       => array('stripTrim', 'stripTags', 'escape'),
     ),
-
+    'email'=>
+    array(
+        'name'          => 'email',
+        'type'          => 'text',
+        'defaultValue'  => '',
+        'id'            => 'email',
+        'label'         => 'Email',
+        'placeholder'   => 'Introduce email',
+        'validation'    => array('required'),
+        'filters'       => array('stripTrim', 'stripTags', 'escape'),
+    ),
     'submitno'=>
     array(
         'name'          => 'enviar',
@@ -39,7 +49,7 @@ $usuariosdelete_form = array(
         'defaultValue'  => 'Si', 
         'validation'    => array( ),
         'filters'       => array(),
-        
+       
     )
 
 );

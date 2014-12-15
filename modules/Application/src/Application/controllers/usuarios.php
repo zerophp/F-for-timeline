@@ -46,7 +46,10 @@ class usuarios
     public function updateAction()
     {
         if($_POST)
-        {
+        {	
+            include_once (__DIR__ . '/../../forms/usuariosForm.php');
+            include_once (__DIR__ . '/../../filterForm.php');
+            include_once (__DIR__ . '/../../validate.php'); 
             // Filtrar
             // Validar             
             $postfilter = filterForm($_POST, $usuarios_form);
@@ -74,6 +77,9 @@ class usuarios
     {
         if($_POST)
         {
+            include_once (__DIR__ . '/../../forms/usuariosForm.php');
+            include_once (__DIR__ . '/../../filterForm.php');
+            include_once (__DIR__ . '/../../validate.php'); 
             // Filtrar
             // Validar
             $postfilter = filterForm($_POST, $usuariosdelete_form);
