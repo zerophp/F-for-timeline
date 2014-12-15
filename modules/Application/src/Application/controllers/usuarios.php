@@ -23,7 +23,7 @@ class usuarios
 {
     public $layout = 'dashboard.phtml';
     
-    public function insertAction()
+    public function insert()
     {
         if ($_POST)
         {
@@ -31,6 +31,7 @@ class usuarios
             $validate = validate($postfilter, $usuarios_form);
             if($validate['valid'])
             {
+                $config = \Core\Application\application::getConfig();
                 // Guardar en un archivo separado por pipes
                 createUser($postfilter, $config);
                 header('Location: /usuarios/select');
@@ -43,8 +44,10 @@ class usuarios
         }
     }
     
-    public function updateAction()
+    public function update($params)
     {
+        $config = \Core\Application\application::getConfig();
+        
         if($_POST)
         {	
             include_once (__DIR__ . '/../../forms/usuariosForm.php');
@@ -58,23 +61,25 @@ class usuarios
             // Si es valido
             if($validate['valid'])
             {
-                    $usuarios = updateUser($postfilter, $config);             
+                $usuarios = updateUser($postfilter, $config);             
             }
             // Ir a select
             header('Location: /usuarios/select');                
         }
         else 
         {
-            $usuario = fetchUser($request['params']['id'], $config);  
-            $usuario['id']=$request['params']['id'];
+            $usuario = fetchUser($params['id'], $config);  
+            $usuario['id']=$params['id'];
             $data_usuario = hydrateUser($usuario, $config);           
             // Dibujar el formulario con los datos del usuario
             include ('/../views/usuarios/update.phtml');            
         }
     }
     
-    public function deleteAction()
+    public function delete($params)
     {
+        $config = \Core\Application\application::getConfig();
+        
         if($_POST)
         {
             include_once (__DIR__ . '/../../forms/usuariosForm.php');
@@ -98,16 +103,16 @@ class usuarios
         }
         else
         {
-            $usuario = fetchUser($request['params']['id'],$config);
+            $usuario = fetchUser($params['id'],$config);
             if($config['repository']=='db')
                 $data_usuario = array (
                     'name'=>$usuario['name'],
-                    'id'=>$request['params']['id']
+                    'id'=>$params['id']
                 );
                 elseif($config['repository']=='txt')
                 $data_usuario = array (
                     'name'=>$usuario[1],
-                    'id'=>$request['params']['id']
+                    'id'=>$params['id']
                 );
                 // Dibujar el formulario de delete con los datos del usuario
                 // Dibujar el formulario con los datos del usuario
@@ -133,26 +138,5 @@ class usuarios
         include ('/../views/usuarios/select.phtml');
     }  
 }
-
-
-
-// switch ($request['action'])
-// {
-//     case 'insert':
-        
-//     break;
-//     case 'update':
-        
-       
-//     break;
-//     case 'delete':
-//         echo "esto es el delete";
-        
-//     break;
-//     default:
-//     case 'select':
-
-//     break;
-// }
 
 
