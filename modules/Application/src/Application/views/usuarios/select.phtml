@@ -1,9 +1,9 @@
 <a href="/usuarios/insert">Insert</a>
 <table class="table table-striped">
-<?php foreach ($data as $key => $fila):
-    $columnas = explode("|", $fila); ?>
+<?php foreach ($data as $row):
+    //$columnas = explode("|", $fila); ?>
     <tr>
-        <?php foreach ($columnas as $key2 => $value): ?>
+        <?php foreach ($row as $key2 => $value): ?>
             <td><?=$value;?></td>
         <?php endforeach;?>
         <td>
