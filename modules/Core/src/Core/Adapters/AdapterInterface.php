@@ -3,7 +3,7 @@ namespace Core\Adapters;
 
 interface AdapterInterface
 {
-    private $link;
+//     private $link;
     /**
      * Connect to adapter
      * @param array $config
