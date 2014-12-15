@@ -10,7 +10,7 @@ function __autoload($class)
 //		print_r($parts);
 //		echo '</pre>';
 //
-	
+    
     foreach($parts as $value)
     {
         $path .= $value . DIRECTORY_SEPARATOR; 
@@ -20,7 +20,8 @@ function __autoload($class)
     $include = __DIR__ . DIRECTORY_SEPARATOR .
 				'modules' . DIRECTORY_SEPARATOR .
 				$module . DIRECTORY_SEPARATOR .
-				'/src/' . DIRECTORY_SEPARATOR . $path . $file . '.php';
+				'src' . DIRECTORY_SEPARATOR . 
+                $path . $file . '.php';
     
     include $include;
 	return;    
