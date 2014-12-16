@@ -10,7 +10,7 @@ class Users
     public function __construct()
     {
         $config = application::getConfig();
-		$adapter = '\\Core\\Adapters\\' . $config['adapter'];
+		$adapter = $config['adapter'];
 
         $adapter = new $adapter();        
         $adapter->setTable('users');

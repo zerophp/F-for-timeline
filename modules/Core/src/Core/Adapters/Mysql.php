@@ -2,9 +2,6 @@
 namespace Core\Adapters;
 
 
-use Core\Application;
-use Core;
-
 class Mysql extends MysqlAbstract implements AdapterInterface
 {
     /**

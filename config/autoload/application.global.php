@@ -6,5 +6,5 @@ $config = array(
         'password'=>'',
         'db'=>'timeline'
     ),   
-    'adapter'=>'db' 
+    'adapter'=>'db' // Must be FQCN
 );

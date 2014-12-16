@@ -128,9 +128,10 @@ class usuarios
 //         $adapter = $mapper ->getAdapter();
         $usuarios = $mapper->getAdapter()->fetchAll();        
         
-        echo "<hr>";
+        echo json_encode($usuarios);
+        die;
         $data = $usuarios;//fetchAllUser($config);
-
+        
 		include (__DIR__ . '/../views/usuarios/select.phtml');
     }  
 }
