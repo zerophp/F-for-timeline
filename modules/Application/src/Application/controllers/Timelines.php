@@ -13,7 +13,7 @@ class Timelines
         
        
         $service = new Services();
-        return $service->{Application::$method}();
+        echo $service->{Application::$method}();
         
        
 
