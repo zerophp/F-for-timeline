@@ -1,35 +1,32 @@
 <?php
-
 namespace Core\Application\Router\model;
-
+/**
+ * Valid URLs
+ * /users/select/id/1/param2/val2/param3/val3 (controller=users, action=select)
+ * /users/select/id/1       (controller=users, action=select)
+ * /users/select            (controller=users, action=select)
+ * /users                   (controller=users, action=default)
+ * /                        (controller=default, action=default)
+ *
+ * Invalid URLs
+ * /users/select/id/1/param2/val2/param3    (controller=error, action=403)
+ * /users/select/id                         (controller=error, action=403)
+ * /users/kaka                              (controller=error, action=404)
+ * /kaka/select                             (controller=error, action=404)
+ * /kaka                                    (controller=error, action=404)
+ *
+ * Formato del request
+ * request = array ('controller'=>'',
+ *                  'action'=>,
+ *                  'params'=>array('param1'=>'val1',
+ *                                  'parm2'=>'val2',
+ *                                  ...
+ *                                  ...
+ *                                  )
+ *                  );
+ */
 class parseUrl
 {
-    /**
-     * Valid URLs
-     * /users/select/id/1/param2/val2/param3/val3 (controller=users, action=select)
-     * /users/select/id/1       (controller=users, action=select)
-     * /users/select            (controller=users, action=select)
-     * /users                   (controller=users, action=default)
-     * /                        (controller=default, action=default)
-     *
-     * Invalid URLs
-     * /users/select/id/1/param2/val2/param3    (controller=error, action=403)
-     * /users/select/id                         (controller=error, action=403)
-     * /users/kaka                              (controller=error, action=404)
-     * /kaka/select                             (controller=error, action=404)
-     * /kaka                                    (controller=error, action=404)
-     *
-     * Formato del request
-     * request = array ('controller'=>'',
-     *                  'action'=>,
-     *                  'params'=>array('param1'=>'val1',
-     *                                  'parm2'=>'val2',
-     *                                  ...
-     *                                  ...
-     *                                  )
-     *                  );
-     */
-    
     public static function parseURL()
     {
         $request = array();
@@ -61,10 +58,7 @@ class parseUrl
             $action = '403';
         }
     
-    
-    
-    
-    
+
         if($controller !='')
         {
             if(!is_file($_SERVER['DOCUMENT_ROOT'].'/../modules/Application/src/Application/controllers/'.$controller.'.php'))
@@ -74,15 +68,19 @@ class parseUrl
             }
         }
     
-        $request = array('controller'=>$controller,
+        $request = array(
+            'method'=>$_SERVER['REQUEST_METHOD'],
+            'controller'=>$controller,
             'action'=>$action,
             'params'=>$params
         );
+        
+        
          
         return $request;
     }
+    
 }
-
 
 
 

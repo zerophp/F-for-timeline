@@ -2,13 +2,13 @@
 namespace Core\Application;
 
 
-use \Core\Module\model as module;
-use \Core\Router\model\parseUrl as getRequest;
+use \Core\Application\Module\model as module;
+use \Core\Application\Router\model\parseUrl as getRequest;
 
 class Application
 {        
     static $view;
-    static $config;
+    static $config; 
     static $controller;
     static $action;
     static $method;

@@ -7,6 +7,8 @@ if(isset($_SERVER['APPLICATION_ENV']))
         ini_set("display_errors", 1);
     }
 
+define('APPLICATION_PATH', __DIR__.'/..');
+
 set_include_path(get_include_path().
             ";".__DIR__.'/../modules'.
             ";".__DIR__.'/../vendor');

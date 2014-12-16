@@ -40,7 +40,10 @@ class Mysql extends MysqlAbstract implements AdapterInterface
         return $usuarios;
     }
     
-    
+    public function getLastId()
+    {
+        return mysqli_insert_id($this->link);
+    }
     
     public function fetch($id)
     {
@@ -60,7 +63,8 @@ class Mysql extends MysqlAbstract implements AdapterInterface
         $sql = rtrim($sql,',');            
         
         $data =mysqli_query($this->link, $sql);
-        return $data;
+        
+        return $this->getLastId();
     }
     
     public function update($id, $data)
