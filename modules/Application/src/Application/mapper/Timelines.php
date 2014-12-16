@@ -1,6 +1,6 @@
 <?php
-namespace Application\mapper;
-use Core\Application\application;
+namespace Application\Mapper;
+use Core\Application\Application;
 
 class Timelines
 {
@@ -17,11 +17,11 @@ class Timelines
         $adapter->connect($config);
         
         $this->setAdapter($adapter);
-//         $dataUsuarios = $adapter->fetchAll();
+        $dataUsuarios = $adapter->fetchAll();
         
-//         echo "<pre>";
-//         print_r($dataUsuarios);
-//         echo "</pre>";
+        echo "<pre>";
+        print_r($dataUsuarios);
+        echo "</pre>";
         
 //         return $dataUsuarios;
     }

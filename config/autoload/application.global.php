@@ -5,6 +5,9 @@ $config = array(
         'user'=>'root',
         'password'=>'',
         'db'=>'timeline'
-    ),   
-    'adapter'=>'Core\Adapters\Mysql' // Must be FQCN
+    ),
+    'repository'=>'db',
+    'adapter'=>'Core\Adapters\Mysql',
+    'default_controller'=>'index',
+    'default_action'=>'index'
 );

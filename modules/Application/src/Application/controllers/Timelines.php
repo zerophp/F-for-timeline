@@ -1,20 +1,22 @@
 <?php
-namespace Application\controllers;
+namespace Application\Controllers;
 
-use Application\Services;
+use Core\Application\Application;
+use Application\Services\Timelines as Services;
 
 class Timelines
 {
-    public $layout = 'none.phtml';
+    public $layout = null;
     
     public function index()
     {
-        $service = new Services\Timelines();
-        $method = \Core\Application\application::$method;
+        
+       
+        $service = new Services();
         
         $id = \Core\Application\application::$params;
         
-        $response = $service->$method($id, file_get_contents('php://input'));
+        $response = $service->{Application::$method}($id, file_get_contents('php://input'));
         header('Content-Type: application/json');
         return $response;
     }
