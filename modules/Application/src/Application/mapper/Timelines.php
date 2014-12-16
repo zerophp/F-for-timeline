@@ -1,4 +1,5 @@
 <?php
+
 namespace Application\Mapper;
 use Core\Application\Application;
 
@@ -58,6 +59,4 @@ class Timelines
         $this->entity = $entity;
     }
 
-    
-    
 }
