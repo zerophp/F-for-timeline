@@ -76,48 +76,21 @@ class usuarios
         }
     }
     
-    public function delete($params)
+    public function delete($id)
     {
-        $config = \Core\Application\application::getConfig();
         
-        if($_POST)
-        {
-            include_once (__DIR__ . '/../../forms/usuariosForm.php');
-            include_once (__DIR__ . '/../../filterForm.php');
-            include_once (__DIR__ . '/../../validate.php'); 
-            // Filtrar
-            // Validar
-            $postfilter = filterForm($_POST, $usuariosdelete_form);
-            $validate = validate($postfilter, $usuariosdelete_form);
-            // Si es valido
-            if($validate['valid'])
-            {
-                // Eliminar la linea ID
-                if($postfilter['enviar']=='Si')
-                {
-                    deleteUser($postfilter['id'], $config);
-                }
-                // Ir a select
-                header('Location: /usuarios/select');
-            }
+        $config =  \Core\Application\application::getConfig();
+        
+        $mapper =  new mapper\Users();
+        
+        try {
+            $usuarios = $mapper->getAdapter()->delete($id);
+        } catch (Exception $e) {
+            return -1;
         }
-        else
-        {
-            $usuario = fetchUser($params['id'],$config);
-            if($config['repository']=='db')
-                $data_usuario = array (
-                    'name'=>$usuario['name'],
-                    'id'=>$params['id']
-                );
-                elseif($config['repository']=='txt')
-                $data_usuario = array (
-                    'name'=>$usuario[1],
-                    'id'=>$params['id']
-                );
-                // Dibujar el formulario de delete con los datos del usuario
-                // Dibujar el formulario con los datos del usuario
-                include ('/../views/usuarios/delete.phtml');
-        }
+        
+        return $id;
+        
     }
     
     public function index()

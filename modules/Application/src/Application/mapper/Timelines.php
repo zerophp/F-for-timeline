@@ -3,33 +3,33 @@ namespace Application\mapper;
 use Core\Application as app;
 use Core\Adapters;
 
-class Users
+class Timelines
 {
     protected $entity;
     protected $adapter;
-    
+
     public function __construct()
     {
         $config = app\application::getConfig();
-        
-		$adapterClass = $config['adapter'];
-		
-		$adapterClass = '\\Core\\Adapters\\' .  $config['adapter'];
-		
-        $adapter = new $adapterClass();     
+
+        $adapterClass = $config['adapter'];
+
+        $adapterClass = '\\Core\\Adapters\\' .  $config['adapter'];
+
+        $adapter = new $adapterClass();
         $adapter->setTable('users');
         $adapter->connect($config);
-        
+
         $this->setAdapter($adapter);
-//         $dataUsuarios = $adapter->fetchAll();
-        
-//         echo "<pre>";
-//         print_r($dataUsuarios);
-//         echo "</pre>";
-        
-//         return $dataUsuarios;
+        //         $dataUsuarios = $adapter->fetchAll();
+
+        //         echo "<pre>";
+        //         print_r($dataUsuarios);
+        //         echo "</pre>";
+
+        //         return $dataUsuarios;
     }
-         
+     
     /**
      * @return the $adapter
      */
@@ -62,6 +62,6 @@ class Users
         $this->entity = $entity;
     }
 
-    
-    
+
+
 }

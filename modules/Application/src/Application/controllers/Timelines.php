@@ -10,7 +10,8 @@ class Timelines
     public function index()
     {
         
-       
+        $config = app\application::$method();
+       echo $config;
         $service = new Services\Timelines();
         return $service->application::$method();
         

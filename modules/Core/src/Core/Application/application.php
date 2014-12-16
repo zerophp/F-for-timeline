@@ -19,6 +19,8 @@ class application
         self::$config = module\moduleManager::getConfig($config);
         $request = getRequest::parseURL();
        
+        print_r ($request);
+        
         self::$method = $request['method'];
         self::$controller = $request['controller'];
         self::$action = $request['action'];
