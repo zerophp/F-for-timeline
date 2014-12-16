@@ -5,7 +5,7 @@ namespace Core\Application;
 use \Core\Module\model as module;
 use \Core\Router\model\parseUrl as getRequest;
 
-class application
+class Application
 {        
     static $view;
     static $config;
@@ -41,14 +41,21 @@ class application
         self::$view=ob_get_contents();
         ob_end_clean();
 
-        self::twoStep($controller->layout);
+        self::twoStep(self::$view, $controller->layout);
     }
 
-    public static function twoStep($layout)
+    public static function twoStep($view, $layout)
     {
-		$view = self::$view;
 		
-        include __DIR__ .'/../../../../'.'Application/src/Application/layouts'.DIRECTORY_SEPARATOR.$layout ;
+        if($layout)
+        {
+            include __DIR__ .'/../../../../'.'Application/src/Application/layouts'.DIRECTORY_SEPARATOR.$layout ;
+        }
+        else
+            echo $view;
+        
+        
+        
     }    
   
 }
