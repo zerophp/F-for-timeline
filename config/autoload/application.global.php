@@ -6,5 +6,5 @@ $config = array(
         'password'=>'',
         'db'=>'timeline'
     ),   
-    'adapter'=>'db' // Must be FQCN
+    'adapter'=>'Core\Adapters\Mysql' // Must be FQCN
 );

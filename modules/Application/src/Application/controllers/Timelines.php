@@ -1,7 +1,7 @@
 <?php
 namespace Application\controllers;
 
-use Core\Application\application;
+use Application\Services;
 
 class Timelines
 {
@@ -9,13 +9,14 @@ class Timelines
     
     public function index()
     {
-        
-       
         $service = new Services\Timelines();
-        return $service->application::$method();
+        $method = \Core\Application\application::$method;
         
-       
-
+        $id = \Core\Application\application::$params;
+        
+        $response = $service->$method($id, file_get_contents('php://input'));
+        header('Content-Type: application/json');
+        return $response;
     }
    
     
