@@ -3,8 +3,11 @@ $config = array(
     'database'=>array(
         'host'=>'localhost',
         'user'=>'root',
-        'password'=>'',
+        'password'=>'1234',
         'db'=>'timeline'
-    ),   
-    'adapter'=>'Mysql' // Must be FQCN
+    ),
+    'repository'=>'db',
+    'adapter'=>'Core\Adapters\Mysql',
+    'default_controller'=>'index',
+    'default_action'=>'index'
 );

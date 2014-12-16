@@ -1,20 +1,18 @@
 <?php
-namespace Application\controllers;
+namespace Application\Controllers;
 
-use Core\Application\application;
+use Core\Application\Application;
+use Application\Services\Timelines as Services;
 
 class Timelines
 {
-    public $layout = 'none.phtml';
+    public $layout = null;
     
     public function index()
     {
         
-        $config = app\application::$method();
-       echo $config;
-        $service = new Services\Timelines();
-        return $service->application::$method();
-        
+        $service = new Services();
+        return $service->{Application::$method}();       
        
 
     }
