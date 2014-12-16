@@ -10,7 +10,10 @@ class Timelines
     
     public function index()
     {        
-        $service = new Services();
-        echo $service->{Application::$method}();
+        $service = new Services();     
+        $id = \Core\Application\application::$params;  
+        $response = $service->{Application::$method}($id, file_get_contents('php://input'));
+        header('Content-Type: application/json');
+        return $response;
     }
 }

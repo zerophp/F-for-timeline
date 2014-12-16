@@ -65,6 +65,7 @@ class Mysql extends MysqlAbstract implements AdapterInterface
     
     public function update($id, $data)
     {
+        $data = (array)$data;
         $sql = "UPDATE ".$this->getTable()." SET ";
         foreach ($data as $key => $value)
             $sql.= $key."='".$value."',";

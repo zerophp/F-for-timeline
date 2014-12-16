@@ -1,7 +1,6 @@
 <?php
 namespace Application\Services;
 
-use Application\Mapper\Users;
 use Application\Mapper;
 
 class Timelines
@@ -32,6 +31,23 @@ class Timelines
     public function PUT($id, $data)
     {
 //         FILA 3
+        $timeline = [];
+        
+        // Comprobar que los datos no vienen vacíos
+        if (isset($id) && isset($data)) {
+        
+            $timelineData = json_decode($data);
+        
+            $mapper = new Mapper\Timelines();
+        
+            // Actualizas la BD
+            $timelines = $mapper->getAdapter()->update($id, $timelineData);
+        
+            // Lees los datos actualizados de BD
+            $timeline = $mapper->getAdapter()->fetch($id);
+        }
+        
+        return json_encode($timeline);
     }
     
     public function DELETE($id)
