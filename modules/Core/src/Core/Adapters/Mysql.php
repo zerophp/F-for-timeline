@@ -81,9 +81,7 @@ class Mysql extends MysqlAbstract implements AdapterInterface
     public function delete($id)
     {
         $sql = "DELETE FROM ".$this->getTable()." 
-                WHERE ".key($id)."=".$id[key($id)];
-				
-        
+                WHERE ".key($id)."=".$id[key($id)];        
         $data =mysqli_query($this->link, $sql);
     }
 }

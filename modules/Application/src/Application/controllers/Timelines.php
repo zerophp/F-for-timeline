@@ -12,7 +12,8 @@ class Timelines
     {        
         $service = new Services();     
         $id = \Core\Application\application::$params;  
-        $response = $service->{Application::$method}($id, file_get_contents('php://input'));
+        $response = $service->{Application::$method}
+                    ($id, file_get_contents('php://input'));
         header('Content-Type: application/json');
         return $response;
     }

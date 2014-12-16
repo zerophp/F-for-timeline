@@ -19,8 +19,6 @@ class Application
         self::$config = module\moduleManager::getConfig($config);
         $request = getRequest::parseURL();
        
-        print_r ($request);
-        
         self::$method = $request['method'];
         self::$controller = $request['controller'];
         self::$action = $request['action'];
@@ -39,7 +37,7 @@ class Application
         $controller = new $controllerNameClass();
         $actionName = self::$action != '' ? self::$action : 'index';
         ob_start();
-            $controller->$actionName();
+            echo $controller->$actionName();            
         self::$view=ob_get_contents();
         ob_end_clean();
 

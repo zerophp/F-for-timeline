@@ -53,7 +53,7 @@ class Timelines
     public function DELETE($id)
     {
 
-        $mapper = new Mapper\Timelines();
+        $mapper = new Mapper\Timelines();               
         $timelines = $mapper->getAdapter()->delete($id);
         echo json_encode($id);
         

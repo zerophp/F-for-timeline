@@ -1,6 +1,6 @@
--- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.5.23, for Win32 (x86)
 --
--- Host: 127.0.0.1    Database: timeline
+-- Host: localhost    Database: timeline
 -- ------------------------------------------------------
 -- Server version	5.5.23
 
@@ -130,6 +130,39 @@ INSERT INTO `tags` VALUES (1,'tag1'),(2,'tag2'),(3,'tag3'),(4,'tag3');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `timelines`
+--
+
+DROP TABLE IF EXISTS `timelines`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `timelines` (
+  `idtimeline` int(11) NOT NULL AUTO_INCREMENT,
+  `start_date` datetime DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL,
+  `headline` varchar(140) DEFAULT NULL,
+  `text` text,
+  `media` varchar(255) DEFAULT NULL,
+  `media_caption` varchar(255) DEFAULT NULL,
+  `media_thumbnail` varchar(255) DEFAULT NULL,
+  `media_credit` varchar(255) DEFAULT NULL,
+  `type` varchar(45) DEFAULT NULL,
+  `tag` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`idtimeline`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `timelines`
+--
+
+LOCK TABLES `timelines` WRITE;
+/*!40000 ALTER TABLE `timelines` DISABLE KEYS */;
+INSERT INTO `timelines` VALUES (1,'2014-10-10 00:00:00','2014-11-11 00:00:00','Headline','text','media','caption','thumbnail','credits','type','tag1'),(3,'2014-12-14 00:00:00','2014-12-15 00:00:00','Headline ACL','text ACL','k','k','k','k','k','tag2');
+/*!40000 ALTER TABLE `timelines` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `types`
 --
 
@@ -167,7 +200,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`iduser`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,7 +209,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Agustincl','agustincl@gmail.com','1234');
+INSERT INTO `users` VALUES (1,'Agustincl','agustincl@gmail.com','1234'),(2,'2014-10-1','2014-10-2','55555556'),(5,'yyyy','yyy','yyy'),(6,'ooooloklok','lokikio','lokioklk');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -189,4 +222,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-03 21:15:23
+-- Dump completed on 2014-12-16 19:26:07
