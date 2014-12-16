@@ -1,6 +1,7 @@
 <?php
 namespace Application\mapper;
-use Core\Application\application;
+use Core\Application as app;
+use Core\Adapters;
 
 class Users
 {
@@ -9,10 +10,13 @@ class Users
     
     public function __construct()
     {
-        $config = application::getConfig();
-		$adapter = $config['adapter'];
-
-        $adapter = new $adapter();        
+        $config = app\application::getConfig();
+        
+		$adapterClass = $config['adapter'];
+		
+		$adapterClass = '\\Core\\Adapters\\' .  $config['adapter'];
+		
+        $adapter = new $adapterClass();     
         $adapter->setTable('users');
         $adapter->connect($config);
         

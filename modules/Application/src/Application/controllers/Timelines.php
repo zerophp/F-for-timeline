@@ -11,10 +11,8 @@ class Timelines
     public function index()
     {
         
-       
         $service = new Services();
-        return $service->{Application::$method}();
-        
+        return $service->{Application::$method}();       
        
 
     }
