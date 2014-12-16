@@ -11,6 +11,7 @@ class application
     static $config;
     static $controller;
     static $action;
+    static $method;
     static $params;
     
     public static function setConfig($config)
@@ -18,6 +19,7 @@ class application
         self::$config = module\moduleManager::getConfig($config);
         $request = getRequest::parseURL();
        
+        self::$method = $request['method'];
         self::$controller = $request['controller'];
         self::$action = $request['action'];
         self::$params = $request['params'];
@@ -45,7 +47,8 @@ class application
     public static function twoStep($layout)
     {
 		$view = self::$view;
-        include __DIR__ . self::$config['layout'] . $layout;
+		
+        include __DIR__ .'/../../../../'.'Application/src/Application/layouts'.DIRECTORY_SEPARATOR.$layout ;
     }    
   
 }

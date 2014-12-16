@@ -68,7 +68,9 @@ class parseUrl
             }
         }
     
-        $request = array('controller'=>$controller,
+        $request = array(
+            'method'=>$_SERVER['REQUEST_METHOD'],
+            'controller'=>$controller,
             'action'=>$action,
             'params'=>$params
         );
